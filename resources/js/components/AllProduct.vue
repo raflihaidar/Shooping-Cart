@@ -2,7 +2,7 @@
     <div class="grid container my-5">
         <h1 class="text-center">All Products</h1>
         <div class="row my-2 m-auto p-5">
-            <div v-for="item in listProducts" :key="item.id" class="col-md-4">
+            <div v-for="item in product" :key="item.id" class="col-md-4">
                 <div class="card" style="width: 18rem;">
                     <img :src="item.img" class="card-image" alt="gambar">
                     <div class="card-body h-75">
@@ -24,7 +24,7 @@
 <script>
     export default{
         props : {
-            listProducts : {
+            product : {
                 type : Array,
             },
         },
