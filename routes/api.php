@@ -17,8 +17,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/getAllData', 'Mocking/Controllers/productController@getData');
-// Route::post('/postData', 'Mocking\Controllers\productController@postData');
+Route::get('/getDataProducts', 'App\Http\Controllers\ProductController@getData');
+Route::post('/postDataProducts', 'App\Http\Controllers\ProductController@postData');
 // Route::put('/putData', 'Mocking\Controllers\productController@putData');
 // Route::patch('/patchData', 'Mocking\Controllers\productController@patchData');
 // Route::delete('/deleteData/{id?}', 'Mocking\Controllers\productController@deleteData');

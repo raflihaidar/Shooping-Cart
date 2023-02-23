@@ -23,7 +23,7 @@
     </head>
     <body class="antialiased">
         <div id="app">
-           <parent-component></parent-component>
+           <router-view></router-view>
         </div>
         <script src="{{mix('js/app.js')}}" type="text/javascript">
         </script>
