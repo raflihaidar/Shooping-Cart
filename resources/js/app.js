@@ -4,13 +4,9 @@ require("./bootstrap");
 window.Vue = require("vue").default;
 
 Vue.component("Navbar", require("./components/Navbar.vue").default);
-Vue.component("all-product", require("./components/AllProduct.vue").default);
+Vue.component("all-product", require("./components/Food.vue").default);
 Vue.component("Cart", require("./components/Cart.vue").default);
-Vue.component(
-    "detailsProducts",
-    require("./components/DetailProducts.vue").default
-);
-Vue.component("Modal", require("./components/Modals.vue"));
+Vue.component("NotFound", require("./components/NotFound.vue").default);
 
 import VueRouter from "vue-router";
 import { routes } from "./routes";

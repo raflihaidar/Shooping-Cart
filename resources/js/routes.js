@@ -1,12 +1,12 @@
-import CatalogProducts from "./components/AllProduct.vue";
+import FoodCatalog from "./components/Food.vue";
 import Cart from "./components/Cart.vue";
-import DetailProducts from "./components/DetailProducts.vue";
+import NotFound from "./components/NotFound.vue";
 
 export const routes = [
     {
         path: "/",
-        name: "Catalog Products",
-        component: CatalogProducts,
+        name: "Food",
+        component: FoodCatalog,
     },
     {
         path: "/cart",
@@ -14,14 +14,8 @@ export const routes = [
         component: Cart,
     },
     {
-        path: "/pruduct/:id",
-        name: "products",
-        component: DetailProducts,
-        props: true,
+        path: "/*",
+        name: "NotFound",
+        component: NotFound,
     },
-    // {
-    //     path: "/*",
-    //     name: "NotFound",
-    //     component: NotFound,
-    // },
 ];

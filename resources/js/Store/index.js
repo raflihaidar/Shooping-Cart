@@ -8,19 +8,30 @@ Vue.use(Vuex, axios);
 export default new Vuex.Store({
     state: {
         products: [],
-        product: null,
         cart: [],
-        total: 0,
+        total: null,
     },
     getters: {
-        AllProducts: (state) => state.products,
+        Food: (state) => state.products,
+        Clothes: (state) => state.products,
+        Toys: (state) => state.products,
         Cart: (state) => state.cart,
         Total: (state) => state.total,
     },
     actions: {
-        async getAllProducts({ commit }) {
-            await axios.get("api/getDataProducts").then((response) => {
-                commit("UPDATE_PRODUCTS", response.data);
+        async getFoodProducts({ commit }) {
+            await axios.get("api/getFoodProducts").then((response) => {
+                commit("SET_FOOD", response.data);
+            });
+        },
+        async getClothesProducts({ commit }) {
+            await axios.get("api/getClothesProducts").then((response) => {
+                commit("SET_CLOTHES", response.data);
+            });
+        },
+        async getToysProducts({ commit }) {
+            await axios.get("api/getToysProducts").then((response) => {
+                commit("SET_TOYS", response.data);
             });
         },
         addToCart({ commit }, payload) {
@@ -32,15 +43,20 @@ export default new Vuex.Store({
         clearCart({ commit }, payload) {
             commit("CLEAR_CART", payload);
         },
-        checkOut({ commit }) {
-            commit("CHECK_OUT");
+        getTotal({ commit }, payload) {
+            commit("SET_TOTAL", payload);
+        },
+        checkOut({ commit }, payload) {
+            commit("CHECK_OUT", payload);
         },
     },
     mutations: {
-        UPDATE_PRODUCTS: (state, payload) => (state.products = payload),
-        SET_PRODUUCT: (state, payload) => (state.product = payload),
+        SET_FOOD: (state, payload) => (state.products = payload),
+        SET_CLOTHES: (state, payload) => (state.products = payload),
+        SET_TOYS: (state, payload) => (state.products = payload),
+        SET_TOTAL: (state, payload) => (state.total = payload),
         CHECK_OUT: (state) => {
-            swal(`Total Belanjaan Anda ${state.total}\nBayar Sekarang ? `, {
+            swal(`Total Belanjaan Anda Rp.${state.total}\nBayar Sekarang ? `, {
                 buttons: {
                     cancel: "Batal",
                     confirm: "Bayar",
@@ -52,7 +68,7 @@ export default new Vuex.Store({
                         button: false,
                         timer: 2000,
                     }).then(() => {
-                        state.total = 0;
+                        state.total = null;
                         state.cart = [];
                     });
                 } else {
@@ -69,7 +85,6 @@ export default new Vuex.Store({
                 payload.stock -= 1;
                 if (addedItem) {
                     addedItem.quantity++;
-                    console.log(addedItem.priceUser);
                     addedItem.priceUser = payload.price * addedItem.quantity;
                 } else {
                     state.cart.push({
@@ -78,7 +93,6 @@ export default new Vuex.Store({
                         priceUser: payload.price,
                     });
                 }
-                state.total += payload.price;
             }
         },
         REMOVE_ITEM: (state, index) => {

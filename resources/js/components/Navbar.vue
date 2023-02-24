@@ -1,6 +1,6 @@
 <template>
     <div class="container mx-auto my-5 d-flex text-center w-100 justify-content-center align-items-center" style="cursor: pointer">
-            <router-link to="/" class="text-decoration-none text-reset fs-5">Products ||</router-link>
+            <router-link to="/" class="text-decoration-none text-reset fs-5">Food ||</router-link>
             <div class="position-relative px-1">
                 <router-link to="/cart" class="text-decoration-none text-reset">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" fill="currentColor" class="bi bi-cart-fill d-inline" viewBox="0 0 16 16">
