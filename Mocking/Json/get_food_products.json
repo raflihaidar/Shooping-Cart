@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "nameProduct": "indomie",
+        "img": "https://th.bing.com/th/id/OIP.7Vxe1efdq8rdUzwnZv1sXQHaF7?w=223&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7",
+        "description": "Mie instan sejuta umat",
+        "stock": 10,
+        "price": 3500,
+        "priceUser": 0,
+        "quantity": 0
+    },
+    {
+        "id": 2,
+        "nameProduct": "Ayam Geprek",
+        "img": "https://th.bing.com/th/id/R.c902a64d738bbeee79ba3aa6daa8e657?rik=%2bNM45L0Sl8irzA&riu=http%3a%2f%2f4.bp.blogspot.com%2f-JgNfUwMgqRw%2fVbjRmRPIdLI%2fAAAAAAAAEcE%2fNflHjdGXKS4%2fs1600%2fIMG_3660.JPG&ehk=ZjAJ2QdVdI%2bl8F%2fahfAxu9C4HBujjLjQL1DybHtQqHg%3d&risl=&pid=ImgRaw&r=0",
+        "description": "dengan sambal pilihan",
+        "stock": 5,
+        "price": 10000,
+        "priceUser": 0,
+        "quantity": 0
+    },
+    {
+        "id": 3,
+        "nameProduct": "Sate",
+        "img": "https://i2.wp.com/resepkoki.id/wp-content/uploads/2017/10/Resep-Sate-Ponorogo.jpg?fit=1613%2C1290&ssl=1",
+        "description": "Sate paling enak",
+        "stock": 20,
+        "price": 18000,
+        "priceUser": 0,
+        "quantity": 0
+    },
+    {
+        "id": 4,
+        "nameProduct": "Nasi Padang",
+        "img": "https://assets-pergikuliner.com/4o-dKncqKNS6QQbFDqM52WkrK0o=/fit-in/1366x768/smart/filters:no_upscale()/https://assets-pergikuliner.com/uploads/bootsy/image/12013/picture-1537766225.jpeg",
+        "description": "Nasi Padang dengan berbagai macam lauk dan rempah yang khas",
+        "stock": 20,
+        "price": 35000,
+        "priceUser": 0,
+        "quantity": 0
+    },
+    {
+        "id": 5,
+        "nameProduct": "Soto Ayam",
+        "img": "https://img.chefkoch-cdn.de/ck.de/rezepte/250/250046/925683-960x720-soto-ayam.jpg",
+        "description": "Soto ayam dengan kuah bening yang gurih dan lezat",
+        "stock": 15,
+        "price": 25000,
+        "priceUser": 0,
+        "quantity": 0
+    },
+    {
+        "id": 6,
+        "nameProduct": "Bakso",
+        "img": "https://th.bing.com/th/id/R.e58cb6f3b565c105cad9366e597a587f?rik=sEWN%2fFJfyvgQYA&riu=http%3a%2f%2farieskitchen.net%2fwp-content%2fuploads%2f2014%2f04%2fIMG_0414.jpg&ehk=vnmLVw5SrqaNOfkvTp3CWIqnDHHOP7ErkXe7vMsp6Ps%3d&risl=&pid=ImgRaw&r=0",
+        "description": "Bakso dengan daging sapi yang kenyal dan bumbu rempah yang khas",
+        "stock": 25,
+        "price": 20000,
+        "priceUser": 0,
+        "quantity": 0
+    }
+]
