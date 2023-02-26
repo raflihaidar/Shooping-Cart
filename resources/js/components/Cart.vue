@@ -16,8 +16,9 @@
                 </thead>
                 <tbody>
                     <tr v-for="(item, index) in Cart" :key="index">
-                        <td>
-                            <input type="checkbox" v-model="selectedValues" :value="item.priceUser" @change="viewTotal">
+                        <td class="align-middle">
+                            <input type="checkbox" v-model="selectedValues" :value="item.priceUser" @change="viewTotal"
+                                @click="setStatus(index)">
                         </td>
                         <td>
                             <div style="width: 200px;">
@@ -52,7 +53,7 @@
         </div>
 
         <div v-else class="text-center mt-5">
-            <div class="bg-danger text-white w-75 p-4 m-auto"> 
+            <div class="bg-danger text-white w-75 p-4 m-auto">
                 <h3>Tidak Ada Produk Disini</h3>
             </div>
         </div>
@@ -85,10 +86,27 @@ export default {
             let amount = this.selectedValues.reduce((a, b) => a + b, 0)
             this.$store.dispatch("getTotal", amount)
         },
+        setStatus(index) {
+            this.$store.dispatch("handleStatus", index)
+        }
     },
     computed: {
         ...mapGetters(["Food", "Cart", "Total"]),
     },
+    mounted() {
+        this.selectedValues = this.Cart.filter(item => item.status).map(item => item.priceUser);
+        this.viewTotal();
+    },
+    watch: {
+        selectedValues: {
+            handler: function (newVal) {
+                this.Cart.forEach((item) => {
+                    item.status = newVal.includes(item.priceUser);
+                });
+            },
+            deep: true
+        }
+    }
 };
 </script>
 -->

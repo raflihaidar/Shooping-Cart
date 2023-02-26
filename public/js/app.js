@@ -5346,9 +5346,30 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
         return a + b;
       }, 0);
       this.$store.dispatch("getTotal", amount);
+    },
+    setStatus: function setStatus(index) {
+      this.$store.dispatch("handleStatus", index);
     }
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(["Food", "Cart", "Total"]))
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(["Food", "Cart", "Total"])),
+  mounted: function mounted() {
+    this.selectedValues = this.Cart.filter(function (item) {
+      return item.status;
+    }).map(function (item) {
+      return item.priceUser;
+    });
+    this.viewTotal();
+  },
+  watch: {
+    selectedValues: {
+      handler: function handler(newVal) {
+        this.Cart.forEach(function (item) {
+          item.status = newVal.includes(item.priceUser);
+        });
+      },
+      deep: true
+    }
+  }
 });
 
 /***/ }),
@@ -5449,7 +5470,9 @@ var render = function render() {
   }, [_vm._m(0), _vm._v(" "), _c("tbody", [_vm._l(_vm.Cart, function (item, index) {
     return _c("tr", {
       key: index
-    }, [_c("td", [_c("input", {
+    }, [_c("td", {
+      staticClass: "align-middle"
+    }, [_c("input", {
       directives: [{
         name: "model",
         rawName: "v-model",
@@ -5479,7 +5502,10 @@ var render = function render() {
           } else {
             _vm.selectedValues = $$c;
           }
-        }, _vm.viewTotal]
+        }, _vm.viewTotal],
+        click: function click($event) {
+          return _vm.setStatus(index);
+        }
       }
     })]), _vm._v(" "), _c("td", [_c("div", {
       staticStyle: {
@@ -5757,12 +5783,6 @@ vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_3_
     Food: function Food(state) {
       return state.products;
     },
-    Clothes: function Clothes(state) {
-      return state.products;
-    },
-    Toys: function Toys(state) {
-      return state.products;
-    },
     Cart: function Cart(state) {
       return state.cart;
     },
@@ -5789,98 +5809,40 @@ vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_3_
         }, _callee);
       }))();
     },
-    getClothesProducts: function getClothesProducts(_ref2) {
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        var commit;
-        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-          while (1) switch (_context2.prev = _context2.next) {
-            case 0:
-              commit = _ref2.commit;
-              _context2.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default().get("api/getClothesProducts").then(function (response) {
-                commit("SET_CLOTHES", response.data);
-              });
-            case 3:
-            case "end":
-              return _context2.stop();
-          }
-        }, _callee2);
-      }))();
-    },
-    getToysProducts: function getToysProducts(_ref3) {
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-        var commit;
-        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-          while (1) switch (_context3.prev = _context3.next) {
-            case 0:
-              commit = _ref3.commit;
-              _context3.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default().get("api/getToysProducts").then(function (response) {
-                commit("SET_TOYS", response.data);
-              });
-            case 3:
-            case "end":
-              return _context3.stop();
-          }
-        }, _callee3);
-      }))();
-    },
-    addToCart: function addToCart(_ref4, payload) {
-      var commit = _ref4.commit;
+    addToCart: function addToCart(_ref2, payload) {
+      var commit = _ref2.commit;
       commit("UPDATE_CART", payload);
     },
-    removeCartProduct: function removeCartProduct(_ref5, index) {
-      var commit = _ref5.commit;
+    removeCartProduct: function removeCartProduct(_ref3, index) {
+      var commit = _ref3.commit;
       commit("REMOVE_ITEM", index);
     },
-    clearCart: function clearCart(_ref6, payload) {
-      var commit = _ref6.commit;
+    clearCart: function clearCart(_ref4, payload) {
+      var commit = _ref4.commit;
       commit("CLEAR_CART", payload);
     },
-    getTotal: function getTotal(_ref7, payload) {
-      var commit = _ref7.commit;
+    getTotal: function getTotal(_ref5, payload) {
+      var commit = _ref5.commit;
       commit("SET_TOTAL", payload);
     },
-    checkOut: function checkOut(_ref8, payload) {
-      var commit = _ref8.commit;
-      commit("CHECK_OUT", payload);
+    handleStatus: function handleStatus(_ref6, payload) {
+      var commit = _ref6.commit;
+      commit("SET_STATUS", payload);
+    },
+    checkOut: function checkOut(_ref7) {
+      var commit = _ref7.commit;
+      commit("CHECK_OUT");
     }
   },
   mutations: {
     SET_FOOD: function SET_FOOD(state, payload) {
       return state.products = payload;
     },
-    SET_CLOTHES: function SET_CLOTHES(state, payload) {
-      return state.products = payload;
-    },
-    SET_TOYS: function SET_TOYS(state, payload) {
-      return state.products = payload;
+    SET_STATUS: function SET_STATUS(state, payload) {
+      state.cart[payload].status = true;
     },
     SET_TOTAL: function SET_TOTAL(state, payload) {
       return state.total = payload;
-    },
-    CHECK_OUT: function CHECK_OUT(state) {
-      sweetalert__WEBPACK_IMPORTED_MODULE_1___default()("Total Belanjaan Anda Rp.".concat(state.total, "\nBayar Sekarang ? "), {
-        buttons: {
-          cancel: "Batal",
-          confirm: "Bayar"
-        }
-      }).then(function (bayar) {
-        if (bayar) {
-          sweetalert__WEBPACK_IMPORTED_MODULE_1___default()("Berhasil di Bayar", {
-            icon: "success",
-            button: false,
-            timer: 2000
-          }).then(function () {
-            state.total = null;
-            state.cart = [];
-          });
-        } else {
-          sweetalert__WEBPACK_IMPORTED_MODULE_1___default()("Batal di Bayar", {
-            timer: 2000
-          });
-        }
-      });
     },
     UPDATE_CART: function UPDATE_CART(state, payload) {
       var addedItem = state.cart.find(function (item) {
@@ -5900,6 +5862,32 @@ vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_3_
         }
       }
     },
+    CHECK_OUT: function CHECK_OUT(state) {
+      sweetalert__WEBPACK_IMPORTED_MODULE_1___default()("Total Belanjaan Anda Rp.".concat(state.total, "\nBayar Sekarang ? "), {
+        buttons: {
+          cancel: "Batal",
+          confirm: "Bayar"
+        }
+      }).then(function (bayar) {
+        if (bayar) {
+          sweetalert__WEBPACK_IMPORTED_MODULE_1___default()("Berhasil di Bayar", {
+            icon: "success",
+            button: false,
+            timer: 2000
+          }).then(function () {
+            state.total = null;
+            var result = state.cart.filter(function (item) {
+              return item.status === false;
+            });
+            state.cart = result;
+          });
+        } else {
+          sweetalert__WEBPACK_IMPORTED_MODULE_1___default()("Batal di Bayar", {
+            timer: 2000
+          });
+        }
+      });
+    },
     REMOVE_ITEM: function REMOVE_ITEM(state, index) {
       var product = state.cart[index];
       if (product.quantity === 1) {
@@ -5915,6 +5903,7 @@ vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_3_
         return item;
       });
       state.total -= product.price;
+      state.cart[index].status = false;
     },
     CLEAR_CART: function CLEAR_CART(state, index) {
       var product = state.cart[index];
@@ -5926,6 +5915,7 @@ vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_3_
         return item;
       });
       state.total -= product.priceUser;
+      state.cart[index].status = false;
     }
   }
 }));
