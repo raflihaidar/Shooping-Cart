@@ -6,7 +6,7 @@
             <h1 class="text-center text-success fw-bold">Food</h1>
             <div class="row my-2 m-auto p-5">
                 <div v-for="item in Food" :key="item.id" class="col-md-4">
-                    <div class="card mb-5 cardCustom" style="width: 18rem; cursor: pointer;" >
+                    <div class="card mb-5 cardCustom" style="width: 18rem; cursor: pointer;">
                         <img :src="item.img" class="card-image" alt="gambar">
                         <div class="card-body h-75">
                             <h5 class="card-title">{{ item.nameProduct }}</h5>
@@ -36,8 +36,8 @@ export default {
     computed: {
         ...mapGetters(['Food']),
     },
-    mounted(){
-        if(this.$store.state.cart.length === 0){
+    mounted() {
+        if (this.$store.state.cart.length === 0) {
             this.$store.dispatch('getFoodProducts')
         }
     }
