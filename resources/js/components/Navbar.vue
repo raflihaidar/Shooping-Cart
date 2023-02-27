@@ -20,18 +20,11 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-    data() {
-        return {
-        }
-    },
     computed: {
         ...mapGetters(['Cart']),
         totalItems() {
             return this.Cart.reduce((a, b) => a + b.quantity, 0)
         }
-    },
-    mounted() {
-        console.log('Component mounted.')
-    },
+    }
 }
 </script>
